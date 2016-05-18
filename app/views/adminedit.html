@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>Profile</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+	<div class="container">
+		<h3 class="navbar-text navbar-left"><a href="/dashboard">My App</a></h3>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/dashboard">Dashboard<span class="sr-only">(current)</span></a></li>
+				<li><a href="/users/edit">Profile</a></li>
+			</ul>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ session['first_name'] }}<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a class="navbar-text" href="/logout">Logout</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+	<div class="row-md-offset-1"><h2 style="text-decoration: underline">Edit User #{{ one_user['id'] }}</h2></div>
+	<div class="col-md-5">
+		<form class="form-horizontal" action="/users/update" method="POST">
+			<div class="form-group">
+				<h4>Edit Information</h4>
+				
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" name="email" placeholder="Email"><br>
+
+				<label for="first_name">First Name:</label>
+				<input type="text" class="form-control" name="first_name" placeholder="First Name"><br>
+
+				<label for="last">Last Name:</label>
+				<input type="text" class="form-control" name="last_name" placeholder="Last Name"><br>
+				{% with messages = get_flashed_messages(category_filter=['edit_errors']) %}
+					{% if messages %}
+						{% for message in messages %}
+							<p class="warning">{{ message }}</p>
+						{% endfor %}
+			  		{% endif %}
+				{% endwith %}		
+				<button type="submit" class="btn btn-success pull-right">Update</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-5 col-md-offset-2">
+		<form class="form-horizontal" action="/create" method="POST">
+			<div class="form-group">
+				<h4>Change Password</h4>
+				<label for="password">Password:</label>
+				<input type="password" class="form-control" name="password" placeholder="Password"><br>
+
+				<label for="pw_confirmation">Password Confirmation:</label>
+				<input type="password" class="form-control" name="pw_confirmation" placeholder="Confirm Password"><br>
+
+				{% with messages = get_flashed_messages(category_filter=['profile_errors']) %}
+					{% if messages %}
+						{% for message in messages %}
+							<p class="warning">{{ message }}</p>
+						{% endfor %}
+			  		{% endif %}
+				{% endwith %}		
+				<button type="submit" class="btn btn-success pull-right">Update Password</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.dropdown-menu{
+	width: 200px;
+	padding: 5px;
+}
+
+.green{
+	color: green;
+}
+
+.panel-body{
+	padding: 5px;
+}
+
+.warning{
+	color: red;
+}
+
+#add{
+	margin-top: 20px;
+}
+
+.user_info{
+	padding-right: 10px;
+}
+
+.button_box form{
+	display: inline-block;
+}
+
+.panel{
+	padding: 20px;
+}
